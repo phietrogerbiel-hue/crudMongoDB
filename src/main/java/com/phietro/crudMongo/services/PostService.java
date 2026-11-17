@@ -1,10 +1,7 @@
 package com.phietro.crudMongo.services;
 
 import com.phietro.crudMongo.domain.Post;
-import com.phietro.crudMongo.domain.User;
-import com.phietro.crudMongo.dto.UserDTO;
 import com.phietro.crudMongo.repository.PostRepository;
-import com.phietro.crudMongo.repository.UserRepository;
 import com.phietro.crudMongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +18,9 @@ public class PostService {
     public Post findById(String id){
         Optional<Post> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+    public List<Post> findByTitleContainingIgnoreCase(String text){
+        return repo.findByTitleContainingIgnoreCase(text);
     }
 }
