@@ -1,6 +1,7 @@
 package com.phietro.crudMongo.services;
 
 import com.phietro.crudMongo.domain.User;
+import com.phietro.crudMongo.dto.UserDTO;
 import com.phietro.crudMongo.repository.UserRepository;
 import com.phietro.crudMongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,12 @@ public class UserService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto){
+        return new User(objDto.getId(),objDto.getName(),objDto.getEmail());
+    }
 
 }
